@@ -1,11 +1,11 @@
 import 'dart:math';
 // Hey wait, I thought I got rid of globals.  No?
-List<int> digits;
+//List<int> digits;
 
 //main(List<String> arguments) async {
 main(List<String> arguments) {
-  int minDigitsForComparison = 4;
-  int maxDigitsForComparison = 5;
+  int minDigitsForComparison = 2;
+  int maxDigitsForComparison = 7;
   int minBase = 10;
   int maxBase = 10;
   print("Starting at " + (new DateTime.now()).toString());
@@ -13,9 +13,9 @@ main(List<String> arguments) {
   for (int base = minBase; base <= maxBase; base++) {
     for (int nDigitsForComparison = minDigitsForComparison; nDigitsForComparison <= maxDigitsForComparison; nDigitsForComparison++) {
       stopWatch.start();
-      digits = new List<int>.filled(nDigitsForComparison, 0);
+      List<int> digits = new List<int>.filled(nDigitsForComparison, 0);
       //await generateDigitsRecursively(base, nDigitsForComparison, 0);
-      generateDigitsRecursively(base, nDigitsForComparison, 0);
+      generateDigitsRecursively(digits, base, nDigitsForComparison, 0);
       stopWatch.stop();
       print("\tProcessed ${nDigitsForComparison}-digit numbers in base $base in ${stopWatch.elapsed.inMilliseconds} milliseconds.");
       stopWatch.reset();
@@ -25,14 +25,14 @@ main(List<String> arguments) {
 }
 
 //generateDigitsRecursively(int base, int nDigitsForComparison, int digitPosition) async {
-generateDigitsRecursively(int base, int nDigitsForComparison, int digitPosition) {
+generateDigitsRecursively(List<int> digits, int base, int nDigitsForComparison, int digitPosition) {
   for (int digitValue = 0; digitValue < base; digitValue++) {
     digits[digitPosition] = digitValue;
     if (digitPosition == 0 && digits[0] == 0) {
       continue; // skip all numbers where leftmost digit is 0
     }
     if (digitPosition < nDigitsForComparison - 1) {
-      generateDigitsRecursively(base, nDigitsForComparison, digitPosition + 1);
+      generateDigitsRecursively(digits, base, nDigitsForComparison, digitPosition + 1);
     }
     else {
       List<int> forwardNumberList = digits;
