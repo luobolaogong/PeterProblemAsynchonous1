@@ -1,5 +1,5 @@
 import 'dart:math';
-
+// Hey wait, I thought I got rid of globals.  No?
 List<int> digits;
 
 //main(List<String> arguments) async {
